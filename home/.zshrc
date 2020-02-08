@@ -64,6 +64,7 @@ ZSH_THEME="robbyrussell"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
   git
+  vi-mode
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -75,12 +76,11 @@ source $ZSH/oh-my-zsh.sh
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
 
-# Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
+if [[ -n $SSH_CONNECTION ]]; then
+  export EDITOR='vim'
+else
+  export EDITOR='code -w'
+fi
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
@@ -99,12 +99,6 @@ source $ZSH/oh-my-zsh.sh
 
 local ret_status="%(?:%{$fg_bold[green]%}➜ :%{$fg_bold[red]%}➜ )"
 PROMPT='${ret_status} %{$fg[cyan]%}%/%{$reset_color%} $(git_prompt_info) [%*]$ '
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/usr/local/google/google-cloud-sdk/path.zsh.inc' ]; then source '/usr/local/google/google-cloud-sdk/path.zsh.inc'; fi
-
-# The next line enables shell command completion for gcloud.
-if [ -f '/usr/local/google/google-cloud-sdk/completion.zsh.inc' ]; then source '/usr/local/google/google-cloud-sdk/completion.zsh.inc'; fi
-
 # Extra stuff for python evnironments because python loves conflicts
 export WORKON_HOME=~/Envs
 source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
@@ -112,7 +106,20 @@ source /usr/local/bin/virtualenvwrapper_lazy.sh
 
 zstyle ':completion:*' use-cache on
 zstyle ':completion:*' cache-path ~/.zsh/cache
-export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 
 # autocomplete
 bindkey '^ ' forward-word
+
+# Alias
+alias k=kubectl
+
+# fuzzy matching for ctrl  +  r
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+ # fuzzy completion , might be slow to start?
+ eval "$(fasd --init auto)"
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/ryandehaven/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/ryandehaven/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/ryandehaven/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/ryandehaven/google-cloud-sdk/completion.zsh.inc'; fi
