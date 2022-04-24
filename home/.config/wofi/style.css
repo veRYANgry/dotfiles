@@ -1,0 +1,39 @@
+#window {
+    margin: 0px;
+    border: 1px solid rgb(189, 147, 249);
+    background-color: rgba(40, 42, 54, .1);
+}
+
+#input {
+    margin: 5px;
+    border: none;
+    color: rgb(248, 248, 242);
+    background-color: rgba(68, 71, 90, .2);
+}
+
+#inner-box {
+    margin: 5px;
+    border: none;
+    background-color: rgba(40, 42, 54, .1);
+}
+
+#outer-box {
+    margin: 5px;
+    border: none;
+    background-color: rgba(40, 42, 54, .1);
+}
+
+#scroll {
+    margin: 0px;
+    border: none;
+}
+
+#text {
+    margin: 5px;
+    border: none;
+    color: rgb(248, 248, 242);
+}
+
+#entry:selected {
+    background-color: rgba(68, 71, 90, .3);
+}
