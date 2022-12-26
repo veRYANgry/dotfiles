@@ -1,5 +1,5 @@
 # If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
+export PATH=usr/local/lib:$PATH
 
 # Path to your oh-my-zsh installation.
 ZSH=/usr/share/oh-my-zsh/
@@ -30,8 +30,6 @@ if [[ ! -d $ZSH_CACHE_DIR ]]; then
   mkdir $ZSH_CACHE_DIR
 fi
 
-# export MOZ_X11_EGL=1 # When firefox is ready this should enable correct video decode on hardware
-
 source $ZSH/oh-my-zsh.sh
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
  
@@ -44,3 +42,9 @@ bindkey '^H' backward-kill-word
 export LC_ALL="en_US.UTF-8"
 # Set all qt apps to use kvantum theme
 export QT_STYLE_OVERRIDE=kvantum
+# Allow for portals to share windows
+export XDG_SESSION_DESKTOP=Wayfire
+
+# Enable AVI for AMD explicitly, nvidia library was trying to load otherwise
+export VDPAU_DRIVER=radeonsi
+export LIBVA_DRIVER_NAME=radeonsi
