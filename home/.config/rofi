@@ -1,0 +1,133 @@
+configuration {
+  modes: [window,drun,run,ssh,combi];
+  combi-modes: [ window, drun, run ];
+}
+
+* {
+	base00: #263238A0;
+	base01: #2E3C43;
+	base02: #314549A0;
+	base03: #546E7A;
+	base04: #B2CCD6;
+	base05: #EEFFFF;
+	base06: #EEFFFF;
+	base07: #FFFFFF;
+	base08: #F07178;
+	base09: #F78C6C;
+	base0A: #FFCB6B;
+	base0B: #C3E88D;
+	base0C: #89DDFFA0;
+	base0D: #82AAFF;
+	base0E: #C792EA;
+	base0F: #FF5370;
+	baseFF: #FFFFFF00;
+
+
+	spacing: 0;
+	background-color: transparent;
+
+	font: "hack";
+}
+
+window {
+	transparency: "real";
+	/*fullscreen: true;*/
+	background-color: @base00;
+}
+
+mainbox {
+	children: [inputbar, message, listview];
+	spacing: 10px;
+	padding: 3px 0;
+}
+
+inputbar {
+	padding: 0 10px;
+	children: [prompt, textbox-prompt-colon, entry, case-indicator];
+}
+
+prompt {
+	text-color: @base0D;
+}
+
+textbox-prompt-colon {
+	expand: false;
+	str: ":";
+	margin: 0 1ch 0 0;
+	text-color: @base0D;
+}
+
+entry {
+	text-color: @base07;
+}
+
+case-indicator {
+	text-color: @base0F;
+}
+
+button, textbox {
+	background-color: @base00;
+	text-color: @base07;
+	padding: 5px;
+}
+
+button selected {
+	background-color: @base0D;
+}
+
+listview {
+	scrollbar: true;
+	margin: 0 10px 0 10px;
+}
+
+scrollbar {
+	background-color: @base03;
+	handle-color: @base0C;
+	handle-width: 5px;
+	border: 0 1px;
+	border-color: @base0C;
+	margin: 0 0 0 10px;
+}
+
+element {
+	padding: 5px;
+	highlight: bold underline;
+}
+
+element normal {
+	background-color: @baseFF;
+}
+
+element selected {
+	background-color: @base02;
+}
+
+element alternate {
+	background-color: @base00;
+}
+
+element selected normal {
+	text-color: @base07;
+	background-color: @base02;
+}
+
+element selected active {
+	text-color: @base07;
+	background-color: @base02;
+}
+
+element normal normal, element alternate normal {
+	text-color: @base07;
+	background-color:  @baseFF;
+}
+
+element normal urgent, element selected urgent, element alternate urgent {
+	text-color: @base0F;
+	background-color: @base00;
+
+}
+
+element normal active, element selected active, element alternate active {
+	text-color: @base0B;
+	background-color: @base00;
+}
