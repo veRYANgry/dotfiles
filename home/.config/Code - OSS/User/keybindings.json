@@ -1,0 +1,89 @@
+// Place your key bindings in this file to override the defaultsauto[]
+[
+    {
+        "key": "ctrl+shift+/",
+        "command": "expandLineSelection",
+        "when": "textInputFocus"
+    },
+    {
+        "key": "ctrl+l",
+        "command": "-expandLineSelection",
+        "when": "textInputFocus"
+    },
+    {
+        "key": "ctrl+j",
+        "command": "dance.select.vertically",
+        "args":{ "direction":  1, "shift": "jump", "by": "halfPage" },
+        "when": "editorTextFocus && dance.mode == 'normal'"
+    },
+    {
+        "key": "ctrl+k",
+        "command": "dance.select.vertically",
+        "args":{ "direction":  -1, "shift": "jump", "by": "halfPage" },
+        "when": "editorTextFocus && dance.mode == 'normal'"
+    },
+    {
+        "key": "space",
+        "command": "dance.openMenu",
+        "args": {
+            "menu": {
+                "items": {
+                    "r": {
+                        "text": "replace symbol",
+                        "command": "editor.action.rename",
+                    },
+                },
+                "locked": true,
+            },
+            "when": "editorTextFocus && dance.mode == 'normal'",
+        },
+        "when": "editorTextFocus && dance.mode == 'normal'",
+    },
+    {
+        "key": "meta+.",
+        "command": "dance.history.repeat.seek",
+        "when": "editorTextFocus && dance.mode == 'normal'"
+    },
+    {
+        "key": "alt+.",
+        "command": "dance.history.repeat.selection",
+        "when": "editorTextFocus && dance.mode == 'normal'"
+    },
+    {
+        "key": "alt+.",
+        "command": "-dance.history.repeat.seek",
+        "when": "editorTextFocus && dance.mode == 'normal'"
+    },
+    {
+        "key": "ctrl+v",
+        "command": "-dance.modes.set.temporarily.insert",
+        "when": "editorTextFocus && dance.mode == 'normal'"
+    },
+    {
+        "key": "ctrl+v",
+        "command": "-dance.modes.set.temporarily.normal",
+        "when": "editorTextFocus && dance.mode == 'insert'"
+    },
+    {
+        "key": "ctrl+j",
+        "command": "-workbench.action.togglePanel"
+    },
+    {
+        "key": "ctrl+alt+j",
+        "command": "breadcrumbs.focusNext"
+    },
+    {
+        "key": "ctrl+right",
+        "command": "-breadcrumbs.focusNext",
+        "when": "breadcrumbsActive && breadcrumbsVisible"
+    },
+    {
+        "key": "ctrl+alt+k",
+        "command": "breadcrumbs.focusPrevious"
+    },
+    {
+        "key": "ctrl+left",
+        "command": "-breadcrumbs.focusPrevious",
+        "when": "breadcrumbsActive && breadcrumbsVisible"
+    },
+]
