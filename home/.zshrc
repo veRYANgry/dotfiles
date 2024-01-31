@@ -20,7 +20,7 @@ plugins=(
 
 # Preferred editor for local and remote sessions
 if [[ -n $SSH_CONNECTION ]]; then
-  export EDITOR='vim'
+  export EDITOR='hx'
 else
   export EDITOR='code -w'
 fi
@@ -42,9 +42,11 @@ bindkey '^H' backward-kill-word
 export LC_ALL="en_US.UTF-8"
 # Set all qt apps to use kvantum theme
 export QT_STYLE_OVERRIDE=kvantum
+export QT_QPA_PLATFORMTHEME=qt5ct
 # Allow for portals to share windows
 export XDG_SESSION_DESKTOP=Wayfire
+# Allow use of google cloud cli
+source /etc/profile.d/google-cloud-cli.sh
+# Aliases, please use sparingly and mostly only for programs that are named different than the common name on other systems
+alias hx="helix"
 
-# Enable AVI for AMD explicitly, nvidia library was trying to load otherwise
-export VDPAU_DRIVER=radeonsi
-export LIBVA_DRIVER_NAME=radeonsi
