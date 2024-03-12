@@ -50,3 +50,4 @@ source /etc/profile.d/google-cloud-cli.sh
 # Aliases, please use sparingly and mostly only for programs that are named different than the common name on other systems
 alias hx="helix"
 
+eval "$(starship init zsh)"
