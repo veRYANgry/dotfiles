@@ -4,7 +4,7 @@ In order to make changes copy over the files in the home directory
 
 # Setting up Arch linux
 - Follow normal procedures for installing using the install script (see arch wiki) 
-- install dev utils for programming 
+- install dev utils for programming
 - Intall github and install paru (from git)
 - using gnu stow in this repo in the home director 
 ```bash
