@@ -3,6 +3,7 @@ if vim.g.neovide then
 	vim.g.neovide_cursor_vfx_particle_density = 20.0
 	vim.g.neovide_refresh_rate = 144
 	vim.g.neovide_fullscreen = false
+	vim.g.neovide_remember_window_size = false
 end
 
 --[[
@@ -163,6 +164,14 @@ vim.keymap.set("n", "<C-h>", "<C-w><C-h>", { desc = "Move focus to the left wind
 vim.keymap.set("n", "<C-l>", "<C-w><C-l>", { desc = "Move focus to the right window" })
 vim.keymap.set("n", "<C-j>", "<C-w><C-j>", { desc = "Move focus to the lower window" })
 vim.keymap.set("n", "<C-k>", "<C-w><C-k>", { desc = "Move focus to the upper window" })
+
+-- Ryans commands
+
+-- Set Ctrl+j to move down 10 lines
+vim.keymap.set("n", "<C-j>", "10j")
+
+-- Set Ctrl+k to move up 10 lines
+vim.keymap.set("n", "<C-k>", "10k")
 
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
@@ -387,8 +396,18 @@ require("lazy").setup({
 					-- Default configuration for telescope goes here:
 					-- config_key = value,
 					-- ..
+					file_title_maker = function(filepath, bufnr, opts)
+						local filename = vim.fn.fnamemodify(filepath, ":t")
+						local width = vim.api.nvim_win_get_width(0) - 4
+						local putils = require("telescope.previewers.utils")
+						local title = putils.make_title(filename, width)
+						return title
+					end,
+					grep_previewer = require("telescope.previewers").vim_buffer_vimgrep.new,
+					qflist_previewer = require("telescope.previewers").vim_buffer_qflist.new,
 					hidden = true,
 					show_hidden = true,
+					winblend = 50,
 				},
 				extensions = {
 					["ui-select"] = {
@@ -405,7 +424,9 @@ require("lazy").setup({
 			local builtin = require("telescope.builtin")
 			vim.keymap.set("n", "<leader>sh", builtin.help_tags, { desc = "[S]earch [H]elp" })
 			vim.keymap.set("n", "<leader>sk", builtin.keymaps, { desc = "[S]earch [K]eymaps" })
-			vim.keymap.set("n", "<leader>sf", builtin.find_files, { desc = "[S]earch [F]iles" })
+			vim.keymap.set("n", "<leader>sf", function()
+				builtin.find_files({ hidden = true })
+			end, { desc = "[S]earch [F]iles" })
 			vim.keymap.set("n", "<leader>ss", builtin.builtin, { desc = "[S]earch [S]elect Telescope" })
 			vim.keymap.set("n", "<leader>sw", builtin.grep_string, { desc = "[S]earch current [W]ord" })
 			vim.keymap.set("n", "<leader>sg", builtin.live_grep, { desc = "[S]earch by [G]rep" })
