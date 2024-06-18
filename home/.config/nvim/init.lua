@@ -66,7 +66,7 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
 -- Set to true if you have a Nerd Font installed
-vim.g.have_nerd_font = false
+vim.g.have_nerd_font = true
 
 -- [[ Setting options ]]
 -- See `:help vim.opt`
@@ -104,7 +104,7 @@ vim.opt.smartcase = true
 vim.opt.signcolumn = "yes"
 
 -- Decrease update time
-vim.opt.updatetime = 250
+vim.opt.updatetime = 100
 
 -- Decrease mapped sequence wait time
 -- Displays which-key popup sooner
@@ -393,9 +393,6 @@ require("lazy").setup({
 				-- },
 				-- pickers = {}
 				defaults = {
-					-- Default configuration for telescope goes here:
-					-- config_key = value,
-					-- ..
 					file_title_maker = function(filepath, bufnr, opts)
 						local filename = vim.fn.fnamemodify(filepath, ":t")
 						local width = vim.api.nvim_win_get_width(0) - 4
@@ -590,6 +587,14 @@ require("lazy").setup({
 			local capabilities = vim.lsp.protocol.make_client_capabilities()
 			capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
 
+			-- Ensure that dynamicRegistration is enabled! This allows the LS to take into account actions like the
+			-- Create Unresolved File code action, resolving completions for unindexed code blocks, ...
+			capabilities.workspace = {
+				didChangeWatchedFiles = {
+					dynamicRegistration = true,
+				},
+			}
+
 			-- Enable the following language servers
 			--  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
 			--
@@ -612,7 +617,7 @@ require("lazy").setup({
 				-- But for many setups, the LSP (`tsserver`) will work just fine
 				-- tsserver = {},
 				--
-
+				markdown_oxide = {},
 				lua_ls = {
 					-- cmd = {...},
 					-- filetypes = { ...},
@@ -783,7 +788,14 @@ require("lazy").setup({
 					--    https://github.com/L3MON4D3/LuaSnip?tab=readme-ov-file#keymaps
 				}),
 				sources = {
-					{ name = "nvim_lsp" },
+					{
+						name = "nvim_lsp",
+						option = {
+							markdown_oxide = {
+								keyword_pattern = [[\(\k\| \|\/\|#\)\+]],
+							},
+						},
+					},
 					{ name = "luasnip" },
 					{ name = "path" },
 				},
