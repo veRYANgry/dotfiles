@@ -6,6 +6,14 @@ if vim.g.neovide then
 	vim.g.neovide_remember_window_size = false
 end
 
+-- Stuff for nvim tree
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+
+-- optionally enable 24-bit colour
+vim.opt.termguicolors = true
+--
+
 --[[
 
   Kickstart.nvim is a starting point for your own configuration.
@@ -161,12 +169,13 @@ vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" }
 --
 --  See `:help wincmd` for a list of all window commands
 vim.keymap.set("n", "<C-h>", "<C-w><C-h>", { desc = "Move focus to the left window" })
-vim.keymap.set("n", "<C-l>", "<C-w><C-l>", { desc = "Move focus to the right window" })
+vim.keymap.set("n", "<C-i>", "<C-w><C-l>", { desc = "Move focus to the right window" })
 vim.keymap.set("n", "<C-j>", "<C-w><C-j>", { desc = "Move focus to the lower window" })
 vim.keymap.set("n", "<C-k>", "<C-w><C-k>", { desc = "Move focus to the upper window" })
 
 -- Ryans commands
 
+vim.keymap.set("n", "<leader>t", ":NvimTreeToggle<CR>", { desc = "Toggle NvimTree" })
 -- Set Ctrl+j to move down 10 lines
 vim.keymap.set("n", "<C-j>", "10j")
 
@@ -196,7 +205,6 @@ if not vim.loop.fs_stat(lazypath) then
 end ---@diagnostic disable-next-line: undefined-field
 vim.opt.rtp:prepend(lazypath)
 
--- [[ Configure and install plugins ]]
 --
 --  To check the current status of your plugins, run
 --    :Lazy
@@ -222,7 +230,25 @@ require("lazy").setup({
 
 	-- "gc" to comment visual regions/lines
 	{ "numToStr/Comment.nvim", opts = {} },
+	{
+		"nvim-tree/nvim-tree.lua",
+		opts = {
+			on_attach = function(bufnr)
+				local api = require("nvim-tree.api")
 
+				local function opts(desc)
+					return { desc = "nvim-tree: " .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
+				end
+
+				-- default mappings
+				api.config.mappings.default_on_attach(bufnr)
+
+				-- custom mappings
+				vim.keymap.set("n", "<C-l>", api.tree.toggle, opts("Toggle"))
+			end,
+		},
+	},
+	{ "nvim-tree/nvim-web-devicons", opts = {} },
 	-- Here is a more advanced example where we pass configuration
 	-- options to `gitsigns.nvim`. This is equivalent to the following Lua:
 	--    require('gitsigns').setup({ ... })
@@ -269,27 +295,25 @@ require("lazy").setup({
 				end, { expr = true })
 
 				-- Actions
-				map("n", "<leader>hs", gs.stage_hunk)
-				map("n", "<leader>hr", gs.reset_hunk)
+				map("n", "<leader>hs", gs.stage_hunk, { desc = "Stage current hunk" })
+				map("n", "<leader>hr", gs.reset_hunk, { desc = "Reset current hunk" })
 				map("v", "<leader>hs", function()
 					gs.stage_hunk({ vim.fn.line("."), vim.fn.line("v") })
-				end)
+				end, { desc = "Stage selected hunk" })
 				map("v", "<leader>hr", function()
 					gs.reset_hunk({ vim.fn.line("."), vim.fn.line("v") })
-				end)
-				map("n", "<leader>hS", gs.stage_buffer)
-				map("n", "<leader>hu", gs.undo_stage_hunk)
-				map("n", "<leader>hR", gs.reset_buffer)
-				map("n", "<leader>hp", gs.preview_hunk)
+				end, { desc = "Reset selected hunk" })
+				map("n", "<leader>hS", gs.stage_buffer, { desc = "Stage entire buffer" })
+				map("n", "<leader>hu", gs.undo_stage_hunk, { desc = "Undo stage hunk" })
+				map("n", "<leader>hR", gs.reset_buffer, { desc = "Reset entire buffer" })
+				map("n", "<leader>hp", gs.preview_hunk, { desc = "Preview hunk changes" })
 				map("n", "<leader>hb", function()
 					gs.blame_line({ full = true })
-				end)
-				map("n", "<leader>tb", gs.toggle_current_line_blame)
-				map("n", "<leader>hd", gs.diffthis)
+				end, { desc = "Show full blame for current line" })
+				map("n", "<leader>hd", gs.diffthis, { desc = "Show diff for current file" })
 				map("n", "<leader>hD", function()
 					gs.diffthis("~")
-				end)
-				map("n", "<leader>td", gs.toggle_deleted)
+				end, { desc = "Show diff against last commit" })
 
 				-- Text object
 				map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>")
@@ -912,7 +936,7 @@ require("lazy").setup({
 
 	-- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
 	--    This is the easiest way to modularize your config.
-	--
+
 	--  Uncomment the following line and add your plugins to `lua/custom/plugins/*.lua` to get going.
 	--    For additional information, see `:help lazy.nvim-lazy.nvim-structuring-your-plugins`
 	-- { import = 'custom.plugins' },
