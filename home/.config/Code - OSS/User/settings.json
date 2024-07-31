@@ -362,5 +362,7 @@
     },
     "editor.renderWhitespace": "all",
     "gitlens.rebaseEditor.ordering": "asc",
-    "editor.bracketPairColorization.independentColorPoolPerBracketType": true
+    "editor.bracketPairColorization.independentColorPoolPerBracketType": true,
+    "editor.cursorSmoothCaretAnimation": "on",
+    "editor.smoothScrolling": true
 }
