@@ -1,156 +1,9 @@
 {
     "explorer.confirmDelete": false,
-    "redhat.telemetry.enabled": true,
-    "bracketPairColorizer.depreciation-notice": false,
     "editor.bracketPairColorization.enabled": true,
     "editor.fontFamily": "Hack",
     "editor.multiCursorModifier": "ctrlCmd",
     "dance.menus": {
-
-        "object": {
-            "title": "Select object...",
-            "items": {
-                "b()": {
-                    "command": "dance.seek.object",
-                    "args": [
-                        {
-                            "input": "\\((?#inner)\\)"
-                        }
-                    ],
-                    "text": "parenthesis block"
-                },
-                "B{}": {
-                    "command": "dance.seek.object",
-                    "args": [
-                        {
-                            "input": "\\{(?#inner)\\}"
-                        }
-                    ],
-                    "text": "braces block"
-                },
-                "r[]": {
-                    "command": "dance.seek.object",
-                    "args": [
-                        {
-                            "input": "\\[(?#inner)\\]"
-                        }
-                    ],
-                    "text": "brackets block"
-                },
-                "a<>": {
-                    "command": "dance.seek.object",
-                    "args": [
-                        {
-                            "input": "<(?#inner)>"
-                        }
-                    ],
-                    "text": "angle block"
-                },
-                "Q\"": {
-                    "command": "dance.seek.object",
-                    "args": [
-                        {
-                            "input": "(?#noescape)\"(?#inner)(?#noescape)\""
-                        }
-                    ],
-                    "text": "double quote string"
-                },
-                "q'": {
-                    "command": "dance.seek.object",
-                    "args": [
-                        {
-                            "input": "(?#noescape)'(?#inner)(?#noescape)'"
-                        }
-                    ],
-                    "text": "single quote string"
-                },
-                "g`": {
-                    "command": "dance.seek.object",
-                    "args": [
-                        {
-                            "input": "(?#noescape)`(?#inner)(?#noescape)`"
-                        }
-                    ],
-                    "text": "grave quote string"
-                },
-                "w": {
-                    "command": "dance.seek.object",
-                    "args": [
-                        {
-                            "input": "[\\p{L}_\\d]+(?<after>[^\\S\\n]+)"
-                        }
-                    ],
-                    "text": "word"
-                },
-                "W": {
-                    "command": "dance.seek.object",
-                    "args": [
-                        {
-                            "input": "[\\S]+(?<after>[^\\S\\n]+)"
-                        }
-                    ],
-                    "text": "WORD"
-                },
-                "s": {
-                    "command": "dance.seek.object",
-                    "args": [
-                        {
-                            "input": "(?#predefined=sentence)"
-                        }
-                    ],
-                    "text": "sentence"
-                },
-                "p": {
-                    "command": "dance.seek.object",
-                    "args": [
-                        {
-                            "input": "(?#predefined=paragraph)"
-                        }
-                    ],
-                    "text": "paragraph"
-                },
-                " ": {
-                    "command": "dance.seek.object",
-                    "args": [
-                        {
-                            "input": "(?<before>[\\s]+)[^\\S\\n]+(?<after>[\\s]+)"
-                        }
-                    ],
-                    "text": "whitespaces"
-                },
-                "i": {
-                    "command": "dance.seek.object",
-                    "args": [
-                        {
-                            "input": "(?#predefined=indent)"
-                        }
-                    ],
-                    "text": "indent"
-                },
-                "n": {
-                    "command": "dance.seek.object",
-                    "args": [
-                        {
-                            "input": "(?#singleline)-?[\\d_]+(\\.[0-9]+)?([eE]\\d+)?"
-                        }
-                    ],
-                    "text": "number"
-                },
-                "u": {
-                    "command": "dance.seek.object",
-                    "args": [
-                        {
-                            "input": "(?#predefined=argument)"
-                        }
-                    ],
-                    "text": "argument"
-                },
-                "c": {
-                    "command": "dance.seek.object",
-                    "text": "custom object desc"
-                }
-            }
-        },
         "goto": {
             "title": "Go...",
             "items": {
@@ -179,15 +32,6 @@
                         }
                     ]
                 },
-                "gk": {
-                    "text": "to first line",
-                    "command": "dance.select.lineStart",
-                    "args": [
-                        {
-                            "count": 1
-                        }
-                    ]
-                },
                 "j": {
                     "text": "to last line",
                     "command": "dance.select.lastLine"
@@ -204,10 +48,6 @@
                 "t": {
                     "text": "to first displayed line",
                     "command": "dance.select.firstVisibleLine"
-                },
-                "c": {
-                    "text": "to middle displayed line",
-                    "command": "dance.select.middleVisibleLine"
                 },
                 "b": {
                     "text": "back in history",
@@ -232,19 +72,9 @@
                 }
             }
         },
-
         "view": {
             "title": "View",
             "items": {
-                "vc": {
-                    "text": "center cursor vertically",
-                    "command": "dance.view.line",
-                    "args": [
-                        {
-                            "at": "center"
-                        }
-                    ]
-                },
                 "t": {
                     "text": "cursor on top",
                     "command": "dance.view.line",
@@ -289,7 +119,6 @@
         }
     },
     "dance.modes": {
-
         "": {
             "hiddenSelectionsIndicatorsDecoration": {
                 "after": {
@@ -364,5 +193,6 @@
     "gitlens.rebaseEditor.ordering": "asc",
     "editor.bracketPairColorization.independentColorPoolPerBracketType": true,
     "editor.cursorSmoothCaretAnimation": "on",
-    "editor.smoothScrolling": true
+    "editor.smoothScrolling": true,
+    "diffEditor.ignoreTrimWhitespace": true
 }
