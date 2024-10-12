@@ -194,5 +194,6 @@
     "editor.bracketPairColorization.independentColorPoolPerBracketType": true,
     "editor.cursorSmoothCaretAnimation": "on",
     "editor.smoothScrolling": true,
-    "diffEditor.ignoreTrimWhitespace": true
+    "diffEditor.ignoreTrimWhitespace": true,
+    "extensions.ignoreRecommendations": true
 }

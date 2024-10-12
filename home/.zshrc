@@ -40,11 +40,6 @@ source /usr/share/fzf/completion.zsh
 bindkey '^H' backward-kill-word
 # Set the terminal output standard
 export LC_ALL="en_US.UTF-8"
-# Set all qt apps to use kvantum theme
-export QT_STYLE_OVERRIDE=kvantum
-export QT_QPA_PLATFORMTHEME=qt5ct
-# Allow for portals to share windows
-export XDG_SESSION_DESKTOP=Wayfire
 # Allow use of google cloud cli
 source /etc/profile.d/google-cloud-cli.sh
 # Aliases, please use sparingly and mostly only for programs that are named different than the common name on other systems
