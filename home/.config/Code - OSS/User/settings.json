@@ -195,5 +195,8 @@
     "editor.cursorSmoothCaretAnimation": "on",
     "editor.smoothScrolling": true,
     "diffEditor.ignoreTrimWhitespace": true,
-    "extensions.ignoreRecommendations": true
+    "extensions.ignoreRecommendations": true,
+    "[yaml]": {
+        "diffEditor.ignoreTrimWhitespace": true
+    }
 }
