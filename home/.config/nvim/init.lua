@@ -159,10 +159,10 @@ vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open diagn
 vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
 
 -- TIP: Disable arrow keys in normal mode
--- vim.keymap.set('n', '<left>', '<cmd>echo "Use h to move!!"<CR>')
--- vim.keymap.set('n', '<right>', '<cmd>echo "Use l to move!!"<CR>')
--- vim.keymap.set('n', '<up>', '<cmd>echo "Use k to move!!"<CR>')
--- vim.keymap.set('n', '<down>', '<cmd>echo "Use j to move!!"<CR>')
+vim.keymap.set("n", "<left>", '<cmd>echo "Use h to move!!"<CR>')
+vim.keymap.set("n", "<right>", '<cmd>echo "Use l to move!!"<CR>')
+vim.keymap.set("n", "<up>", '<cmd>echo "Use k to move!!"<CR>')
+vim.keymap.set("n", "<down>", '<cmd>echo "Use j to move!!"<CR>')
 
 -- Keybinds to make split navigation easier.
 --  Use CTRL+<hjkl> to switch between windows
@@ -181,6 +181,10 @@ vim.keymap.set("n", "<C-j>", "10j")
 
 -- Set Ctrl+k to move up 10 lines
 vim.keymap.set("n", "<C-k>", "10k")
+-- Like helix
+vim.keymap.set("n", "gh", "0", { desc = "go to begining of line" })
+vim.keymap.set("n", "gl", "$", { desc = "go to end of line" })
+vim.keymap.set("n", "ge", "G", { desc = "go to end of the page" })
 
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
@@ -260,6 +264,10 @@ require("lazy").setup({
 		config = function() -- This is the function that runs, AFTER loading
 			require("leap").create_default_mappings()
 		end,
+	},
+	{
+		"nvim-treesitter/nvim-treesitter-context",
+		opts = {},
 	},
 	{ -- Adds git related signs to the gutter, as well as utilities for managing changes
 		"lewis6991/gitsigns.nvim",
