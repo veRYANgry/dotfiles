@@ -198,5 +198,10 @@
     "extensions.ignoreRecommendations": true,
     "[yaml]": {
         "diffEditor.ignoreTrimWhitespace": true
-    }
+    },
+    "editor.autoClosingBrackets": "beforeWhitespace",
+    "editor.autoClosingQuotes": "beforeWhitespace",
+    "html.autoClosingTags": false,
+    "javascript.autoClosingTags": false,
+    "typescript.autoClosingTags": false
 }
