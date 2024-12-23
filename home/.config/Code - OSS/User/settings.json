@@ -194,7 +194,7 @@
     "editor.bracketPairColorization.independentColorPoolPerBracketType": true,
     "editor.cursorSmoothCaretAnimation": "on",
     "editor.smoothScrolling": true,
-    "diffEditor.ignoreTrimWhitespace": true,
+    "diffEditor.ignoreTrimWhitespace": false,
     "extensions.ignoreRecommendations": true,
     "[yaml]": {
         "diffEditor.ignoreTrimWhitespace": true
@@ -203,5 +203,8 @@
     "editor.autoClosingQuotes": "beforeWhitespace",
     "html.autoClosingTags": false,
     "javascript.autoClosingTags": false,
-    "typescript.autoClosingTags": false
+    "typescript.autoClosingTags": false,
+    "[python]": {
+        "diffEditor.ignoreTrimWhitespace": true
+    }
 }
