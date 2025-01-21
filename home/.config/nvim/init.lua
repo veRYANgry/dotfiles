@@ -4,6 +4,7 @@ if vim.g.neovide then
 	vim.g.neovide_refresh_rate = 144
 	vim.g.neovide_fullscreen = false
 	vim.g.neovide_remember_window_size = false
+	vim.o.guifont = "Hack,Noto_Color_Emoji:h12"
 end
 
 -- Stuff for nvim tree
@@ -169,7 +170,7 @@ vim.keymap.set("n", "<down>", '<cmd>echo "Use j to move!!"<CR>')
 --
 --  See `:help wincmd` for a list of all window commands
 vim.keymap.set("n", "<C-h>", "<C-w><C-h>", { desc = "Move focus to the left window" })
-vim.keymap.set("n", "<C-i>", "<C-w><C-l>", { desc = "Move focus to the right window" })
+-- vim.keymap.set("n", "<C-i>", "<C-w><C-l>", { desc = "Move focus to the right window" })
 vim.keymap.set("n", "<C-j>", "<C-w><C-j>", { desc = "Move focus to the lower window" })
 vim.keymap.set("n", "<C-k>", "<C-w><C-k>", { desc = "Move focus to the upper window" })
 
@@ -177,15 +178,19 @@ vim.keymap.set("n", "<C-k>", "<C-w><C-k>", { desc = "Move focus to the upper win
 
 vim.keymap.set("n", "<leader>t", ":NvimTreeToggle<CR>", { desc = "Toggle NvimTree" })
 -- Set Ctrl+j to move down 10 lines
-vim.keymap.set("n", "<C-j>", "10j")
+vim.keymap.set("n", "<C-j>", "20j")
 
 -- Set Ctrl+k to move up 10 lines
-vim.keymap.set("n", "<C-k>", "10k")
+vim.keymap.set("n", "<C-k>", "20k")
 -- Like helix
 vim.keymap.set("n", "gh", "0", { desc = "go to begining of line" })
 vim.keymap.set("n", "gl", "$", { desc = "go to end of line" })
 vim.keymap.set("n", "ge", "G", { desc = "go to end of the page" })
 
+-- Jump to next error
+vim.keymap.set("n", "gp", function()
+	vim.cmd("lnext")
+end, { desc = "Jump to next error" })
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
 
@@ -253,11 +258,18 @@ require("lazy").setup({
 		},
 	},
 	{ "nvim-tree/nvim-web-devicons", opts = {} },
-	-- Here is a more advanced example where we pass configuration
-	-- options to `gitsigns.nvim`. This is equivalent to the following Lua:
-	--    require('gitsigns').setup({ ... })
-	--
-	-- See `:help gitsigns` to understand what the configuration keys do
+	{
+		"rmagatti/auto-session",
+		lazy = false,
+
+		---enables autocomplete for opts
+		---@module "auto-session"
+		---@type AutoSession.Config
+		opts = {
+			suppressed_dirs = { "~/", "~/Projects", "~/Downloads", "/" },
+			-- log_level = 'debug',
+		},
+	},
 	{
 		"ggandor/leap.nvim",
 		opts = {},
@@ -265,6 +277,11 @@ require("lazy").setup({
 			require("leap").create_default_mappings()
 		end,
 	},
+	-- Here is a more advanced example where we pass configuration
+	-- options to `gitsigns.nvim`. This is equivalent to the following Lua:
+	--    require('gitsigns').setup({ ... })
+	--
+	-- See `:help gitsigns` to understand what the configuration keys do
 	{
 		"nvim-treesitter/nvim-treesitter-context",
 		opts = {},
@@ -797,7 +814,7 @@ require("lazy").setup({
 					-- Accept ([y]es) the completion.
 					--  This will auto-import if your LSP supports it.
 					--  This will expand snippets if the LSP sent a snippet.
-					["<C-y>"] = cmp.mapping.confirm({ select = true }),
+					["<enter>"] = cmp.mapping.confirm({ select = true }),
 
 					-- Manually trigger a completion from nvim-cmp.
 					--  Generally you don't need this, because nvim-cmp will display
