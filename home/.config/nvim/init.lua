@@ -1,10 +1,10 @@
 if vim.g.neovide then
 	vim.g.neovide_cursor_vfx_mode = "torpedo"
 	vim.g.neovide_cursor_vfx_particle_density = 20.0
-	vim.g.neovide_refresh_rate = 144
+	vim.g.neovide_refresh_rate = 165
 	vim.g.neovide_fullscreen = false
 	vim.g.neovide_remember_window_size = false
-	vim.o.guifont = "Hack,Noto_Color_Emoji:h12"
+	vim.o.guifont = "Hack Nerd Font,Noto_Color_Emoji:h12"
 end
 
 -- Stuff for nvim tree
@@ -186,6 +186,8 @@ vim.keymap.set("n", "<C-k>", "20k")
 vim.keymap.set("n", "gh", "0", { desc = "go to begining of line" })
 vim.keymap.set("n", "gl", "$", { desc = "go to end of line" })
 vim.keymap.set("n", "ge", "G", { desc = "go to end of the page" })
+
+vim.keymap.set("i", "<C-BS>", "<C-w>", { desc = "Delete previous word" })
 
 -- Jump to next error
 vim.keymap.set("n", "gp", function()
