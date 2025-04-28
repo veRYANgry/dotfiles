@@ -206,5 +206,6 @@
     "typescript.autoClosingTags": false,
     "[python]": {
         "diffEditor.ignoreTrimWhitespace": true
-    }
+    },
+    "editor.cursorBlinking": "smooth"
 }
