@@ -176,7 +176,9 @@ vim.keymap.set("n", "<C-k>", "<C-w><C-k>", { desc = "Move focus to the upper win
 
 -- Ryans commands
 
+-- custom mappings
 vim.keymap.set("n", "<leader>t", ":NvimTreeToggle<CR>", { desc = "Toggle NvimTree" })
+vim.keymap.set("n", "<C-l>", ":NvimTreeFindFile<CR>", { desc = "Open Nvim" })
 -- Set Ctrl+j to move down 10 lines
 vim.keymap.set("n", "<C-j>", "20j")
 
@@ -253,9 +255,6 @@ require("lazy").setup({
 
 				-- default mappings
 				api.config.mappings.default_on_attach(bufnr)
-
-				-- custom mappings
-				vim.keymap.set("n", "<C-l>", api.tree.toggle, opts("Toggle"))
 			end,
 		},
 	},

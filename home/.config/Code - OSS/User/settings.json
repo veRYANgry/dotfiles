@@ -197,7 +197,7 @@
     "diffEditor.ignoreTrimWhitespace": true,
     "extensions.ignoreRecommendations": true,
     "[yaml]": {
-        "diffEditor.ignoreTrimWhitespace": true
+        "diffEditor.ignoreTrimWhitespace": false
     },
     "editor.autoClosingBrackets": "beforeWhitespace",
     "editor.autoClosingQuotes": "beforeWhitespace",
