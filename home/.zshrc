@@ -42,6 +42,9 @@ bindkey '^H' backward-kill-word
 export LC_ALL="en_US.UTF-8"
 # Allow use of google cloud cli
 source /etc/profile.d/google-cloud-cli.sh
+export GOOGLE_GENAI_USE_VERTEXAI=true
+export GOOGLE_CLOUD_PROJECT=genesis-sandbox-93018
+export GOOGLE_CLOUD_LOCATION=us-central1
 # Aliases, please use sparingly and mostly only for programs that are named different than the common name on other systems
 alias hx="helix"
 
