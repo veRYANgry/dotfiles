@@ -347,7 +347,20 @@ require("lazy").setup({
 				map("n", "<leader>hD", function()
 					gs.diffthis("~")
 				end, { desc = "Show diff against last commit" })
-
+				map("n", "<leader>hl", function()
+					local file_path = vim.fn.expand("%:p")
+					local relative_path = vim.fn.fnamemodify(file_path, ":.")
+					-- Get the last commit hash that modified this specific file
+					local cmd = string.format("git log -1 --format=%%H -- %s", vim.fn.shellescape(relative_path))
+					local handle = io.popen(cmd)
+					local last_commit = handle:read("*l")
+					handle:close()
+					if last_commit and last_commit ~= "" then
+						gs.diffthis(last_commit)
+					else
+						print("No previous changes found for this file")
+					end
+				end, { desc = "Show diff against last change to this file" })
 				-- Text object
 				map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>")
 			end,
