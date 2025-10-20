@@ -6,10 +6,18 @@ ZSH=/usr/share/oh-my-zsh/
 
 ZSH_THEME="robbyrussell"
 
+ZSH_CUSTOM=/usr/share/zsh
+
 plugins=(
   git
   vi-mode
-)
+  zsh-syntax-highlighting
+  zsh-autosuggestions
+  )
+
+autoload -Uz compinit promptinit
+compinit
+promptinit
 
 # User configuration
 
@@ -31,8 +39,6 @@ if [[ ! -d $ZSH_CACHE_DIR ]]; then
 fi
 
 source $ZSH/oh-my-zsh.sh
-source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
- 
 # fuzzy matching for ctrl  +  r and others
 source /usr/share/fzf/key-bindings.zsh
 source /usr/share/fzf/completion.zsh
