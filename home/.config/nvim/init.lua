@@ -898,7 +898,30 @@ require("lazy").setup({
 		dependencies = { "nvim-lua/plenary.nvim" },
 		opts = { signs = false },
 	},
+	{
+		"thgrund/tidal.nvim",
+		opts = {
 
+			boot = {
+				tidal = {
+					cmd = "ghci",
+					args = {
+						"-v0",
+					},
+					file = "/usr/share/haskell-tidal/BootTidal.hs",
+					enabled = true,
+					highlight = {
+						fps = 120,
+					},
+				},
+			},
+		},
+		-- Recommended: Install TreeSitter parsers for Haskell and SuperCollider
+		dependencies = {
+			"nvim-treesitter/nvim-treesitter",
+			opts = { ensure_installed = { "haskell", "supercollider" } },
+		},
+	},
 	{ -- Collection of various small independent plugins/modules
 		"echasnovski/mini.nvim",
 		config = function()
