@@ -176,6 +176,8 @@ vim.keymap.set("n", "<C-k>", "<C-w><C-k>", { desc = "Move focus to the upper win
 
 -- Ryans commands
 
+vim.keymap.set({ "n", "x", "o" }, "s", "<Plug>(leap)")
+vim.keymap.set("n", "S", "<Plug>(leap-from-window)")
 -- custom mappings
 vim.keymap.set("n", "<leader>t", ":NvimTreeToggle<CR>", { desc = "Toggle NvimTree" })
 vim.keymap.set("n", "<C-l>", ":NvimTreeFindFile<CR>", { desc = "Open Nvim" })
@@ -274,15 +276,25 @@ require("lazy").setup({
 	{
 		"ggandor/leap.nvim",
 		opts = {},
-		config = function() -- This is the function that runs, AFTER loading
-			require("leap").create_default_mappings()
+		config = function()
+			require("leap").opts.preview = function(ch0, ch1, ch2)
+				return not (ch1:match("%s") or (ch0:match("%a") and ch1:match("%a") and ch2:match("%a")))
+			end
+
+			-- Define equivalence classes for brackets and quotes, in addition to
+			-- the default whitespace group:
+			require("leap").opts.equivalence_classes = {
+				" \t\r\n",
+				"([{",
+				")]}",
+				"'\"`",
+			}
+
+			-- Use the traversal keys to repeat the previous motion without
+			-- explicitly invoking Leap:
+			require("leap.user").set_repeat_keys("<enter>", "<backspace>")
 		end,
 	},
-	-- Here is a more advanced example where we pass configuration
-	-- options to `gitsigns.nvim`. This is equivalent to the following Lua:
-	--    require('gitsigns').setup({ ... })
-	--
-	-- See `:help gitsigns` to understand what the configuration keys do
 	{
 		"nvim-treesitter/nvim-treesitter-context",
 		opts = {},
