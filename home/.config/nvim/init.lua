@@ -229,7 +229,6 @@ vim.opt.rtp:prepend(lazypath)
 --  To update plugins you can run
 --    :Lazy update
 --
--- NOTE: Here is where you install your plugins.
 require("lazy").setup({
 	-- NOTE: Plugins can be added with a link (or for a github repo: 'owner/repo' link).
 	"tpope/vim-sleuth", -- Detect tabstop and shiftwidth automatically
@@ -415,6 +414,11 @@ require("lazy").setup({
 			})
 		end,
 	},
+	{
+		"sindrets/diffview.nvim",
+		event = "VimEnter",
+		config = function() end,
+	},
 
 	-- NOTE: Plugins can specify dependencies.
 	--
@@ -429,7 +433,7 @@ require("lazy").setup({
 		branch = "0.1.x",
 		dependencies = {
 			"nvim-lua/plenary.nvim",
-			{ -- If encountering errors, see telescope-fzf-native README for installation instructions
+			{
 				"nvim-telescope/telescope-fzf-native.nvim",
 
 				-- `build` is used to run some command when the plugin is installed/updated.
