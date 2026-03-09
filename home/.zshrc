@@ -3,9 +3,7 @@ export PATH=usr/local/lib:$PATH
 
 # Path to your oh-my-zsh installation.
 ZSH=/usr/share/oh-my-zsh/
-
 ZSH_THEME="robbyrussell"
-
 ZSH_CUSTOM=/usr/share/zsh
 
 plugins=(
@@ -30,7 +28,7 @@ promptinit
 if [[ -n $SSH_CONNECTION ]]; then
   export EDITOR='hx'
 else
-  export EDITOR='code -w'
+  export EDITOR='neovide'
 fi
 
 ZSH_CACHE_DIR=$HOME/.cache/oh-my-zsh
