@@ -273,7 +273,7 @@ require("lazy").setup({
 		},
 	},
 	{
-		"ggandor/leap.nvim",
+		url = "https://codeberg.org/andyg/leap.nvim",
 		opts = {},
 		config = function()
 			require("leap").opts.preview = function(ch0, ch1, ch2)
@@ -430,7 +430,7 @@ require("lazy").setup({
 	{ -- Fuzzy Finder (files, lsp, etc)
 		"nvim-telescope/telescope.nvim",
 		event = "VimEnter",
-		branch = "0.1.x",
+		branch = "master",
 		dependencies = {
 			"nvim-lua/plenary.nvim",
 			{
@@ -938,9 +938,9 @@ require("lazy").setup({
 			},
 		},
 		-- Recommended: Install TreeSitter parsers for Haskell and SuperCollider
+		-- Run :TSInstall haskell supercollider to install them
 		dependencies = {
 			"nvim-treesitter/nvim-treesitter",
-			opts = { ensure_installed = { "haskell", "supercollider" } },
 		},
 	},
 	{ -- Collection of various small independent plugins/modules
@@ -982,32 +982,14 @@ require("lazy").setup({
 	},
 	{ -- Highlight, edit, and navigate code
 		"nvim-treesitter/nvim-treesitter",
+		branch = "main",
 		build = ":TSUpdate",
-		opts = {
-			ensure_installed = { "bash", "c", "html", "lua", "markdown", "vim", "vimdoc" },
-			-- Autoinstall languages that are not installed
-			auto_install = true,
-			highlight = {
-				enable = true,
-				-- Some languages depend on vim's regex highlighting system (such as Ruby) for indent rules.
-				--  If you are experiencing weird indenting issues, add the language to
-				--  the list of additional_vim_regex_highlighting and disabled languages for indent.
-				additional_vim_regex_highlighting = { "ruby" },
-			},
-			indent = { enable = true, disable = { "ruby" } },
-		},
-		config = function(_, opts)
-			-- [[ Configure Treesitter ]] See `:help nvim-treesitter`
-
-			---@diagnostic disable-next-line: missing-fields
-			require("nvim-treesitter.configs").setup(opts)
-
-			-- There are additional nvim-treesitter modules that you can use to interact
-			-- with nvim-treesitter. You should go explore a few and see what interests you:
-			--
-			--    - Incremental selection: Included, see `:help nvim-treesitter-incremental-selection-mod`
-			--    - Show your current context: https://github.com/nvim-treesitter/nvim-treesitter-context
-			--    - Treesitter + textobjects: https://github.com/nvim-treesitter/nvim-treesitter-textobjects
+		config = function()
+			-- [[ Configure Treesitter ]]
+			-- The main branch no longer uses nvim-treesitter.configs; highlight and
+			-- indent are native Neovim 0.12 features. This plugin now only manages
+			-- parser installation. Install parsers with :TSInstall <lang>.
+			require("nvim-treesitter").setup()
 		end,
 	},
 
