@@ -175,6 +175,70 @@ vim.keymap.set("n", "<C-j>", "<C-w><C-j>", { desc = "Move focus to the lower win
 vim.keymap.set("n", "<C-k>", "<C-w><C-k>", { desc = "Move focus to the upper window" })
 
 -- Ryans commands
+local font_size_timer = nil
+local font_size_float = nil
+
+local function show_font_size_float(msg)
+	-- close existing float
+	if font_size_float and vim.api.nvim_win_is_valid(font_size_float) then
+		vim.api.nvim_win_close(font_size_float, true)
+	end
+
+	local buf = vim.api.nvim_create_buf(false, true)
+	vim.api.nvim_buf_set_lines(buf, 0, -1, false, { "  " .. msg .. "  " })
+
+	local width = #msg + 4
+	font_size_float = vim.api.nvim_open_win(buf, false, {
+		relative = "editor",
+		anchor = "SE",
+		row = vim.o.lines - 2,
+		col = vim.o.columns,
+		width = width,
+		height = 1,
+		style = "minimal",
+		border = "rounded",
+		zindex = 200,
+	})
+	vim.api.nvim_set_option_value("winhl", "Normal:MoreMsg,FloatBorder:MoreMsg", { win = font_size_float })
+end
+
+local function adjust_font_size(delta)
+	local new_size
+
+	local ok, guifont = pcall(function() return vim.o.guifont end)
+	if not ok or guifont == "" then return end
+	local font, size = guifont:match("^(.+):h(%d+)")
+	if font and size then
+		local ns = math.max(1, tonumber(size) + delta)
+		vim.o.guifont = font .. ":h" .. ns
+		new_size = tostring(ns) .. "pt"
+	end
+
+	if new_size then
+		show_font_size_float("Font size: " .. new_size)
+
+		if font_size_timer then
+			font_size_timer:stop()
+			font_size_timer:close()
+		end
+		font_size_timer = vim.uv.new_timer()
+		font_size_timer:start(1500, 0, vim.schedule_wrap(function()
+			if font_size_float and vim.api.nvim_win_is_valid(font_size_float) then
+				vim.api.nvim_win_close(font_size_float, true)
+				font_size_float = nil
+			end
+			font_size_timer:close()
+			font_size_timer = nil
+		end))
+	end
+end
+
+vim.keymap.set({ "n", "i" }, "<C-ScrollWheelUp>", function()
+	adjust_font_size(1)
+end)
+vim.keymap.set({ "n", "i" }, "<C-ScrollWheelDown>", function()
+	adjust_font_size(-1)
+end)
 
 vim.keymap.set({ "n", "x", "o" }, "s", "<Plug>(leap)")
 vim.keymap.set("n", "S", "<Plug>(leap-from-window)")
