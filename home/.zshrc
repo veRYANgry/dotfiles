@@ -49,6 +49,7 @@ source /etc/profile.d/google-cloud-cli.sh
 export GOOGLE_GENAI_USE_VERTEXAI=true
 export GOOGLE_CLOUD_PROJECT=genesis-sandbox-93018
 export GOOGLE_CLOUD_LOCATION=global
+export GOOGLE_APPLICATION_CREDENTIALS="/home/very/.config/genesis-sandbox-93018-8b451622d509.json"
 # Aliases, please use sparingly and mostly only for programs that are named different than the common name on other systems
 alias hx="helix"
 
