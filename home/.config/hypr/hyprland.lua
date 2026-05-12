@@ -124,7 +124,8 @@ hl.bind("CTRL + SPACE", hl.dsp.exec_cmd('rofi -combi-modi window,drun -font "hac
 hl.bind(mainMod .. " + SHIFT + S", hl.dsp.exec_cmd("flameshot gui --raw | wl-copy"))
 hl.bind(mainMod .. " + S", hl.dsp.exec_cmd("slurp | grim -g - - | wl-copy"))
 hl.bind(mainMod .. " + SHIFT + N", hl.dsp.exec_cmd("bash makoctl restore && makoctl invoke && makoctl dismiss"))
-hl.bind(mainMod .. " + K", hl.dsp.exec_cmd("sleep 1 && hyprctl dispatch dpms off"))
+hl.bind(mainMod .. "+ ALT + K", hl.dsp.exec_cmd("sleep 1 && hyprctl dispatch dpms off"))
+hl.bind(mainMod .. "+ ALT + J", hl.dsp.exec_cmd("sleep 1 && systemctl suspend"))
 
 -- Focus with arrow keys
 hl.bind(mainMod .. " + left", hl.dsp.focus({ direction = "left" }))
