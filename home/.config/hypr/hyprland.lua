@@ -47,7 +47,7 @@ hl.config({
 		rounding = 2,
 		rounding_power = 1,
 		active_opacity = 1.0,
-		inactive_opacity = 0.9,
+		inactive_opacity = 0.97,
 
 		shadow = {
 			enabled = false,
@@ -114,6 +114,7 @@ hl.config({
 -- Keyboard shortcuts
 local mainMod = "SUPER"
 
+hl.bind("CTRL + Q", hl.dsp.window.close())
 hl.bind(mainMod .. " + Q", hl.dsp.exec_cmd(terminal))
 hl.bind(mainMod .. " + RETURN", hl.dsp.exec_cmd(terminal))
 hl.bind(mainMod .. " + E", hl.dsp.exec_cmd(fileManager))
@@ -124,8 +125,9 @@ hl.bind("CTRL + SPACE", hl.dsp.exec_cmd('rofi -combi-modi window,drun -font "hac
 hl.bind(mainMod .. " + SHIFT + S", hl.dsp.exec_cmd("flameshot gui --raw | wl-copy"))
 hl.bind(mainMod .. " + S", hl.dsp.exec_cmd("slurp | grim -g - - | wl-copy"))
 hl.bind(mainMod .. " + SHIFT + N", hl.dsp.exec_cmd("bash makoctl restore && makoctl invoke && makoctl dismiss"))
-hl.bind(mainMod .. "+ ALT + K", hl.dsp.exec_cmd("sleep 1 && hyprctl dispatch dpms off"))
+hl.bind(mainMod .. "+ ALT + K", hl.dsp.dpms({ action = "toggle" }))
 hl.bind(mainMod .. "+ ALT + J", hl.dsp.exec_cmd("sleep 1 && systemctl suspend"))
+hl.bind(mainMod .. "+ K", hl.dsp.exec_cmd("rofi -modi clipboard:~/.config/cliphist/cliphist-rofi-img.sh -show clipboard -show-icons"))
 
 -- Focus with arrow keys
 hl.bind(mainMod .. " + left", hl.dsp.focus({ direction = "left" }))
