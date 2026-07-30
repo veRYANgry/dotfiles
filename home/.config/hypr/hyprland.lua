@@ -129,6 +129,9 @@ hl.bind(mainMod .. "+ ALT + K", hl.dsp.dpms({ action = "toggle" }))
 hl.bind(mainMod .. "+ ALT + J", hl.dsp.exec_cmd("sleep 1 && systemctl suspend"))
 hl.bind(mainMod .. "+ K", hl.dsp.exec_cmd("rofi -modi clipboard:~/.config/cliphist/cliphist-rofi-img.sh -show clipboard -show-icons"))
 
+hl.bind("code:191", hl.dsp.pass({window = "class:^(discord)$"}), {ignore_mods = true})
+hl.bind("code:191", hl.dsp.pass({window = "class:^(discord)$"}), {ignore_mods = true, release = true})
+
 -- Focus with arrow keys
 hl.bind(mainMod .. " + left", hl.dsp.focus({ direction = "left" }))
 hl.bind(mainMod .. " + right", hl.dsp.focus({ direction = "right" }))
