@@ -383,24 +383,22 @@ require("lazy").setup({
 
 				-- Navigation
 				map("n", "]c", function()
+					if require("config.diff_navigation").jump(1) then return end
 					if vim.wo.diff then
-						return "]c"
+						vim.cmd.normal({ bang = true, args = { "]c" } })
+						return
 					end
-					vim.schedule(function()
-						gs.next_hunk()
-					end)
-					return "<Ignore>"
-				end, { expr = true })
+					gs.next_hunk()
+				end, { desc = "Next change" })
 
 				map("n", "[c", function()
+					if require("config.diff_navigation").jump(-1) then return end
 					if vim.wo.diff then
-						return "[c"
+						vim.cmd.normal({ bang = true, args = { "[c" } })
+						return
 					end
-					vim.schedule(function()
-						gs.prev_hunk()
-					end)
-					return "<Ignore>"
-				end, { expr = true })
+					gs.prev_hunk()
+				end, { desc = "Previous change" })
 
 				-- Actions
 				map("n", "<leader>hs", gs.stage_hunk, { desc = "Stage current hunk" })
@@ -481,7 +479,18 @@ require("lazy").setup({
 	{
 		"sindrets/diffview.nvim",
 		event = "VimEnter",
-		config = function() end,
+		config = function()
+			local navigation = require("config.diff_navigation")
+
+			require("diffview").setup({
+				keymaps = {
+					view = {
+						{ "n", "]c", function() navigation.jump(1) end, { desc = "Next change (across files)" } },
+						{ "n", "[c", function() navigation.jump(-1) end, { desc = "Previous change (across files)" } },
+					},
+				},
+			})
+		end,
 	},
 
 	-- NOTE: Plugins can specify dependencies.
